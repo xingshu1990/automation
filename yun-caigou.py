@@ -68,12 +68,12 @@ class YunCaiGouAssistant:
             'ref_url': '',
         }
         response = self.session.post('http://yun-caigou.com/member/index.php', params=params, headers=self.headers, data=data, verify=False)
-# 这部分是获取【报价单管理】的json
+# 这部分是获取【消息提醒】的json
     def fetch_messages(self):
         url = "http://yun-caigou.com/mall/index.php?app=member&wwi=ajax_store_msg"
         html = self.session.post(url).text
         return json.loads(html)['list']
-# 这部分是解析【报价单管理】json数据，为了不让电脑以及网站承受过多压力，只抓取第一页5条内容。
+# 这部分是解析【消息提醒】json数据，为了不让电脑以及网站承受过多压力，只抓取第一页5条内容。
     def display_messages(self):
         messages = self.fetch_messages()
         for msg in messages[:5]:
